@@ -210,7 +210,7 @@ public class ChartModel: ObservableObject, Identifiable, NSCopying {
     @Published public var defaultCategorySelectionMode: ChartCategorySelectionMode = .index
 
     /// When false a state is allowed in which no series is selected/active.
-    @Published public var selectionRequired: Bool = false
+    @Published public var selectionRequired: String = "false"
 
     @Published public var selectedSeriesIndex: Int?
 
