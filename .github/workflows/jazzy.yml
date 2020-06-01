@@ -28,8 +28,8 @@ jobs:
       image: norionomura/jazzy:0.13.3_swift-5.2.1
     steps:
       - uses: actions/checkout@v2
-	  - run: bundle install --path vendor/bundle
-	  - run: swift package generate-xcodeproj
+      - run: bundle install --path vendor/bundle
+      - run: swift package generate-xcodeproj
       - name: Generate documentation json
         run: sourcekitten doc --module-name FioriCharts -- -project FioriSwiftUI.xcodeproj > charts.json
       - name: Run jazzy
