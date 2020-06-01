@@ -40,7 +40,6 @@ jobs:
         with:
           name: API Docs
           path: docs
-      - run: git fetch origin gh-pages:gh-pages
       - name: Commit
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
