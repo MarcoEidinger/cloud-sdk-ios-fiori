@@ -32,10 +32,8 @@ jobs:
           brew install sourcekitten
           gem install jazzy
       - run: swift package generate-xcodeproj
-      - name: Generate documentation json
-        run: sourcekitten doc --module-name FioriCharts -- -project FioriSwiftUI.xcodeproj > charts.json
-      - name: Run jazzy
-        run: jazzy --clean --sourcekitten-sourcefile charts.json
+      - name: Generate documentation json and run jazzy
+        run: ./scripts/docu-gen.sh
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
