@@ -31,10 +31,12 @@ jobs:
         run: |
           brew install sourcekitten
           gem install jazzy
+      - name: Generate Xcode project
       - run: swift package generate-xcodeproj
+      - name: Build Package
       - run: xcodebuild build -scheme FioriSwiftUI-Package -sdk iphonesimulator
-      - name: Generate documentation json and run jazzy
-        run: ./scripts/docu-gen.sh
+      - name: Generate Documentation (Jazzy)
+        run: ./scripts/generateDocumentation.sh
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
