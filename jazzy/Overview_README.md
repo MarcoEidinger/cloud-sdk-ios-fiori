@@ -14,4 +14,4 @@ This project currently contains two modules: **FioriCharts** and **FioriIntegrat
 - [FioriCharts](./charts/index.html)
 - [FioriIntegrationCards](./integrationCards/index.html)
 
-For more details please visit github repository https://github.com/SAP/cloud-sdk-ios-fiori
+For more details please visit https://github.com/SAP/cloud-sdk-ios-fiori
