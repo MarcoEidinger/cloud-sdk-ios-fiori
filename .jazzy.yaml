@@ -1,9 +1,5 @@
 module: cloud-sdk-ios-fiori
 author: SAP
 author_url: https://www.sap.com
-root_url: https://pages.github.com/MarcoEidinger/cloud-sdk-ios-fiori
-github_url: https://github.com/MarcoEidinger/cloud-sdk-ios-fiori
-github_file_prefix: https://github.com/MarcoEidinger/cloud-sdk-ios-fiori/tree/master
-theme: fullwidth
-clean: true
+theme: jony
 copyright: '© 2020 [SAP](https://www.sap.com) under Apache 2.0.'
