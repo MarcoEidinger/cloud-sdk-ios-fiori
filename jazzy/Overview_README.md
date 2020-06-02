@@ -14,7 +14,4 @@ This project currently contains two modules: **FioriCharts** and **FioriIntegrat
 - [FioriCharts](./charts/index.html)
 - [FioriIntegrationCards](./integrationCards/index.html)
 
-## License
-
-Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved.
-This file is licensed under the Apache-2.0 license except as noted otherwise in the [LICENSE](/LICENSE) and [NOTICE](/NOTICE) files.
+For more details please visit https://github.com/SAP/cloud-sdk-ios-fiori
