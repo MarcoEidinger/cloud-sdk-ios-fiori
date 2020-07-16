@@ -1,0 +1,36 @@
+name: SnapshotTests
+
+on:
+  push:
+    branches: [ snapshot-testing ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    # - name: Create folder for snapshot references
+    #   run: mkdir Apps/SnapshotTestApp/cloud-sdk-ios-fiori-snapshot-references
+    - name: Checkout Snapshot references
+      uses: actions/checkout@v2
+      with:
+        repository: MarcoEidinger/cloud-sdk-ios-fiori-snapshot-references
+        path: Apps/SnapshotTestApp/cloud-sdk-ios-fiori-snapshot-references
+    - name: Inspect
+      run: ls Apps/SnapshotTestApp/cloud-sdk-ios-fiori-snapshot-references/
+    - name: Inspect2
+      run: ls Apps/SnapshotTestApp/cloud-sdk-ios-fiori-snapshot-references/FioriCharts/WaterfallChartSnapshotTests/
+    - name: Generate Xcode project
+      run: swift package generate-xcodeproj
+    - name: Build Package
+      run: xcodebuild -project FioriSwiftUI.xcodeproj -scheme FioriSwiftUI-Package -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 11' build
+    # - name: Download snapshot references
+    #   run: ./scripts/snapshottesting/addSubmoduleSnapthshotReferences.sh
+    - name: Run snapshot tests
+      run: xcodebuild -workspace ./Apps/Apps.xcworkspace -scheme SnapshotTestApp -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone SE (2nd generation)' test
+
+

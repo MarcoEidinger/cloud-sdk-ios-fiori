@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:SnapshotTestApp/SnapshotTestApp.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:Micro Charts/Micro Charts.xcodeproj">
    </FileRef>
    <FileRef

@@ -31,6 +31,20 @@ If you choose to run the script please make sure your dev machine has
   - tip: you can use [pyenv](https://github.com/pyenv/pyenv) to manage and switch between multiple python versions
 - `npm` (with `npx` as package runner which is included with 5.2+)
 
+## Snapshot Testing
+
+In addition to unit tests we verify visual correctness of our SwiftUI components with help of [swift-snapshot-testing](https://github.com/pointfreeco/swift-snapshot-testing). Central build will run those tests for pull requests.
+
+To run tests locally you have to download the snapshot reference files for which you can run shell script `scripts/snapshottesting/addSubmoduleSnapthshotReferences.sh`. Tests can then manually executed in `TBD` app as part of its unit tests
+
+To add additional snapshot tests please follow this approach:
+1. write your tests. As example see `TBD`
+2. run tests to record reference images
+3. push reference images (from submodule directory) to its remote and create PR for companion `TBD` repository
+4. finally push your code changes and create PR for this repository
+
+To remove all the donwloaded reference images (and git submodule configuration) please run shell script `scripts/snapshottesting/removeSubmoduleSnapshotReferences.sh`
+
 ## Legal stuff
 
 ### Contributors License Agreement

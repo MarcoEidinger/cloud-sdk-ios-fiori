@@ -9,6 +9,15 @@ bash scripts/installGitHooks.sh
 rm -f -r ./FioriSwiftUI.xcodeproj
 swift package generate-xcodeproj
 
+# clone/update snapshot reference images (DO NOT automatically do this in this script as this would generate modified files to be committed)
+# if [ -d "./Apps/SnapshotTestApp/cloud-sdk-ios-fiori-snapshot-references" ]
+# then
+# 	git submodule update --init --recursive
+# else
+# 	bash scripts/snapshottesting/addSubmoduleSnapthshotReferences.sh
+# fi
+echo "INFO: if you want to run snapshot tests then please download snapshot reference images with shell script: scripts/snapshottesting/addSubmoduleSnapthshotReferences.sh"
+
 # add run script to xcode project file (if python 3.7+ is available)
 if ! hash python; then
     echo "WARNING: no run script was added to Xcode project file to execute SwiftLint check because python version of 3.7+ required"
