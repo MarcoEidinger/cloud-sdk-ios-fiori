@@ -1,4 +1,4 @@
-// swift-tools-version:5.1
+// swift-tools-version:5.2
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -22,9 +22,9 @@ let package = Package(
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
-        .package(url: "https://github.com/objcio/tiny-networking", from: "0.2.0"),
+        .package(name: "TinyNetworking", url: "https://github.com/objcio/tiny-networking", from: "0.2.0"),
         .package(url: "https://github.com/Flight-School/AnyCodable.git", from: "0.2.3"),
-        .package(url: "https://github.com/sstadelman/observable-array.git", from: "1.2.0"),
+        .package(name: "ObservableArray", url: "https://github.com/sstadelman/observable-array.git", from: "1.2.0"),
         .package(url: "https://github.com/marmelroy/Zip.git", from: "2.0.0")
     ],
     targets: [
@@ -33,7 +33,7 @@ let package = Package(
             dependencies: ["FioriIntegrationCards"]),
         .target(
             name: "FioriIntegrationCards",
-            dependencies: ["AnyCodable", "TinyNetworking", "ObservableArray", "FioriCharts", "Zip"]),
+            dependencies: ["AnyCodable", .product(name: "TinyNetworking", package: "TinyNetworking"), "ObservableArray", "FioriCharts", "Zip"]),
         .target(
             name: "FioriCharts",
             dependencies: ["FioriSwiftUICore"]),
