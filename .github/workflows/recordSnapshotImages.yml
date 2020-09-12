@@ -2,10 +2,11 @@ name: ManualWorkflows
 
 on:
   workflow_dispatch:
-    actionName:
-      description: 'Action'
-      required: true
-      default: 'recordSnapshotTests'
+    inputs:
+      actionName:
+        description: 'Action'
+        required: true
+        default: 'recordSnapshotTests'
 
 jobs:
 
