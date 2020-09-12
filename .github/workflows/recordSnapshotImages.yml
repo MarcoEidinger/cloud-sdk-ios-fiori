@@ -1,0 +1,48 @@
+name: ManualWorkflows
+
+on:
+  workflow_dispatch:
+    logLevel:
+      description: 'action'
+      required: true
+      default: 'recordSnapshotTests'
+
+jobs:
+
+  recordSnapshotTests:
+    if: github.event.inputs.action == 'recordSnapshotTests'
+    runs-on: macos-latest
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_11.6.app/Contents/Developer
+    steps:
+    - name: Checkout Repo
+      uses: actions/checkout@v2
+    - name: Checkout Snapshot references
+      uses: actions/checkout@v2
+      with:
+        repository: SAP/cloud-sdk-ios-fiori-snapshot-references
+        path: Apps/Examples/cloud-sdk-ios-fiori-snapshot-references
+    - name: Delete old snapshot references
+      run:  |
+        rm -r -f Apps/Examples/cloud-sdk-ios-fiori-snapshot-references/FioriCharts
+        rm -r -f Apps/Examples/cloud-sdk-ios-fiori-snapshot-references/FioriIntegrationCards
+    - name: Generate Xcode project
+      run: swift package generate-xcodeproj
+    - name: Install xcbeautify tool
+      run:  |
+        brew tap thii/xcbeautify https://github.com/thii/xcbeautify.git
+        brew install swiftlint xcbeautify
+    - name: Build Package
+      run: set -o pipefail && xcodebuild -project FioriSwiftUI.xcodeproj -scheme FioriSwiftUI-Package -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 11' build | xcbeautify
+    - name: Run snapshot tests
+      run: set -o pipefail && xcodebuild -project ./Apps/Examples/Examples.xcodeproj -scheme ExamplesTests -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone SE (2nd generation)' test | xcbeautify
+    - name: Collect screenshot results on failure
+      if: failure()
+      run:  |
+        cd Apps/Examples/cloud-sdk-ios-fiori-snapshot-references
+        git config --global user.email "${GITHUB_ACTOR}"
+        git config --global user.name "${GITHUB_ACTOR}@users.noreply.github.com"
+        git checkout -b 'automatic recording'
+        git add -A
+        git commit -m 'record new/updates images'
+        git push origin HEAD
