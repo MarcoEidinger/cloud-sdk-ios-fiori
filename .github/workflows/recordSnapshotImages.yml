@@ -11,7 +11,7 @@ on:
 jobs:
 
   recordSnapshotTests:
-    #if: github.event.inputs.actionName == 'recordSnapshotTests'
+    if: github.event.inputs.actionName == 'recordSnapshotTests'
     runs-on: macos-latest
     env:
       DEVELOPER_DIR: /Applications/Xcode_11.6.app/Contents/Developer
@@ -43,7 +43,7 @@ jobs:
         cd Apps/Examples/cloud-sdk-ios-fiori-snapshot-references
         git config --global user.email "${GITHUB_ACTOR}"
         git config --global user.name "${GITHUB_ACTOR}@users.noreply.github.com"
-        git checkout -b 'automatic recording'
+        git checkout -b 'automaticRecording'
         git add -A
         git commit -m 'record new/updates images'
         git push origin HEAD
