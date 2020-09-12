@@ -2,8 +2,8 @@ name: ManualWorkflows
 
 on:
   workflow_dispatch:
-    logLevel:
-      description: 'action'
+    action:
+      description: 'Action'
       required: true
       default: 'recordSnapshotTests'
 
