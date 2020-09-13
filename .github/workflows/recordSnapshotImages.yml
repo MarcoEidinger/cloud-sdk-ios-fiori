@@ -37,13 +37,16 @@ jobs:
       run: set -o pipefail && xcodebuild -project FioriSwiftUI.xcodeproj -scheme FioriSwiftUI-Package -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 11' build | xcbeautify
     - name: Run snapshot tests
       run: set -o pipefail && xcodebuild -project ./Apps/Examples/Examples.xcodeproj -scheme ExamplesTests -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone SE (2nd generation)' test | xcbeautify
-    - name: Collect screenshot results on failure
+    - name: Create Pull Request
       if: failure()
-      run:  |
-        cd Apps/Examples/cloud-sdk-ios-fiori-snapshot-references
-        git config --global user.email "${GITHUB_ACTOR}"
-        git config --global user.name "${GITHUB_ACTOR}@users.noreply.github.com"
-        git checkout -b 'automaticRecording'
-        git add -A
-        git commit -m 'record new/updates images'
-        git push origin HEAD
+      uses: peter-evans/create-pull-request@v3
+      with:
+        token: ${{ secrets.UPLOAD_SNAPSHOT_IMAGES }}
+        commit-message: Create/update images
+        committer: GitHub <noreply@github.com>
+        author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+        signoff: false
+        branch: workflowTriggeredRecordings
+        delete-branch: true
+        title: 'Record new/updates images'
+        draft: false
