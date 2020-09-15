@@ -30,7 +30,10 @@ jobs:
     - name: Checkout Repo
       uses: actions/checkout@v2
     - name: npx standard-version with --release-as
-      run: npx standard-version --tag-prefix '' --release-as '${{ github.event.inputs.releaseVersion }}'
+      run:   |
+        git config --global user.email "${GITHUB_ACTOR}"
+        git config --global user.name "${GITHUB_ACTOR}@users.noreply.github.com"
+        npx standard-version --tag-prefix '' --release-as '${{ github.event.inputs.releaseVersion }}'
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v3
       with:
