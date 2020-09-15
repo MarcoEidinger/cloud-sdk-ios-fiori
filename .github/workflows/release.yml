@@ -1,0 +1,48 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      dryRun:
+        description: 'Dry Run'
+        required: true
+        default: 'true'
+      releaseVersion:
+        description: 'Notation is major.minor.patch (leave empty for automatic determination)'
+        required: false
+        default: ''
+
+jobs:
+
+  dryRun:
+    if: github.event.inputs.dryRun == 'true'
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Repo
+      uses: actions/checkout@v2
+    - name: npx standard-version with --dry-run
+      run: npx standard-version --tag-prefix '' --dry-run
+
+  releaseAs:
+    if: github.event.inputs.dryRun == 'false' && github.event.inputs.releaseVersion != null
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Repo
+      uses: actions/checkout@v2
+    - name: npx standard-version with --release-as
+      run:   |
+        git config --global user.email "${GITHUB_ACTOR}"
+        git config --global user.name "${GITHUB_ACTOR}@users.noreply.github.com"
+        npx standard-version --tag-prefix '' --release-as '${{ github.event.inputs.releaseVersion }}'
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v3
+      with:
+        token: ${{ secrets.UPLOAD_SNAPSHOT_IMAGES }}
+        commit-message: 'chore: prepare for new release'
+        committer: GitHub <noreply@github.com>
+        author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+        signoff: false
+        branch: prepareForNewRelease
+        delete-branch: true
+        title: 'Prepare for new release'
+        draft: false
