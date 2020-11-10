@@ -1,6 +1,8 @@
 import Foundation
 import SwiftUI
 
+// dummy change to prove that snapshot testing (unit testing) in Examples app will faill
+// https://bugs.swift.org/browse/SR-13739
 struct ButtonOverlayView: View {
     var isSelected: Bool
     var isEnable: Bool
