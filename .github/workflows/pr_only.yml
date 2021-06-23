@@ -117,3 +117,12 @@ jobs:
             echo '${{ env.GIT_DIFF }}'
             echo '${{ env.GIT_DIFF_INS }}'
             echo '${{ env.GIT_DIFF_LINES }}'
+        - uses: actions/github-script@v4
+          with:
+            script: |
+              github.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: 'Please check if localizable text has comment'
+              })
