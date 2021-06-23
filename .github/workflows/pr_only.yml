@@ -101,7 +101,7 @@ jobs:
 #         name: SnapshotTestResultImages
 #         path: ./SnapshotTestResultImages
 
-    LocalizableTextCommentsCheck:
+  LocalizableTextCommentsCheck:
       runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@v2
