@@ -120,7 +120,7 @@ jobs:
         - name: Find Comment
           uses: peter-evans/find-comment@v1
           id: checkStringFileComment
-          if: GIT_DIFF_INS > 0
+          if: env.GIT_DIFF_INS > 0
           with:
             issue-number: ${{ github.event.pull_request.number }}
             comment-author: 'github-actions[bot]'
