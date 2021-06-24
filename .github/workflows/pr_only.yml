@@ -117,12 +117,19 @@ jobs:
             echo '${{ env.GIT_DIFF }}'
             echo '${{ env.GIT_DIFF_INS }}'
             echo '${{ env.GIT_DIFF_LINES }}'
-        - uses: actions/github-script@v4
+        - name: Find Comment
+          uses: peter-evans/find-comment@v1
+          id: checkStringFileComment
+          if: GIT_DIFF_INS > 0
           with:
-            script: |
-              github.issues.createComment({
-                issue_number: context.issue.number,
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                body: 'Please check if localizable text has comment'
-              })
+            issue-number: ${{ github.event.pull_request.number }}
+            comment-author: 'github-actions[bot]'
+            body-includes: Localizable Text added - check if .strings file contains comments for translators!
+
+        - name: Create comment
+          if: steps.checkStringFileComment.outputs.comment-id == ''
+          uses: peter-evans/create-or-update-comment@v1
+          with:
+            issue-number: ${{ github.event.pull_request.number }}
+            body: |
+             Localizable Text added - check if .strings file contains comments for translators!
