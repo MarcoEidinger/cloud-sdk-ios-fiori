@@ -124,7 +124,7 @@ jobs:
           with:
             issue-number: ${{ github.event.pull_request.number }}
             comment-author: 'github-actions[bot]'
-            body-includes: Localizable Text added - check if .strings file contains comments for translators!
+            body-includes: Localizable Text added so check if .strings file contains comments for translators!
 
         - name: Create comment
           if: steps.checkStringFileComment.outputs.comment-id == ''
@@ -132,4 +132,4 @@ jobs:
           with:
             issue-number: ${{ github.event.pull_request.number }}
             body: |
-             Localizable Text added - check if .strings file contains comments for translators!
+             Localizable Text added so check if .strings file contains comments for translators!
