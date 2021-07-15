@@ -81,3 +81,8 @@ FioriSwiftUI.xcodeproj
 
 # Brewfile lock
 Brewfile.lock.json
+
+# Binary Distribution
+*.xcframework
+Release-iphoneos.xcarchive
+Release-iphonesimulator.xcarchive

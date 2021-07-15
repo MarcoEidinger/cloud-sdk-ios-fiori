@@ -9,18 +9,28 @@ let package = Package(
     platforms: [.iOS(.v13)],
     products: [
         .library(
-            name: "FioriSwiftUI",
-            type: .dynamic,
+            name: "FioriSwiftUI", type: .dynamic,                     
+            
             targets: ["FioriSwiftUI"]
         ),
         .library(
-            name: "FioriCharts",
-            type: .dynamic,
+            name: "FioriThemeManager", type: .dynamic,                     
+            
+            targets: ["FioriThemeManager"]
+        ),
+        .library(
+            name: "FioriSwiftUICore", type: .dynamic,                     
+            
+            targets: ["FioriSwiftUICore"]
+        ),
+        .library(
+            name: "FioriCharts", type: .dynamic,                     
+            
             targets: ["FioriCharts"]
         ),
         .library(
-            name: "FioriIntegrationCards",
-            type: .dynamic,
+            name: "FioriIntegrationCards", type: .dynamic,                     
+            
             targets: ["FioriIntegrationCards"]
         )
     ],
