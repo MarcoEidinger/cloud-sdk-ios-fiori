@@ -52,9 +52,14 @@ pre, code {
   color: #777;
   word-wrap: normal; }
 
+pre {
+  line-height: 1.6; }
+
 a {
   color: #0088cc;
   text-decoration: none; }
+  a code {
+    color: inherit; }
 
 ul {
   padding-left: 15px; }
@@ -69,6 +74,18 @@ blockquote {
   margin-left: 0;
   padding: 0 10px;
   border-left: 4px solid #ccc; }
+
+hr {
+  height: 1px;
+  border: none;
+  background-color: #e2e2e2; }
+
+.footnote-ref {
+  display: inline-block;
+  scroll-margin-top: 87px; }
+
+.footnote-def {
+  scroll-margin-top: 87px; }
 
 .content-wrapper {
   margin: 0 auto;
@@ -218,6 +235,7 @@ header {
   margin: 0; }
 
 .task-group-section {
+  margin-top: 10px;
   border-top: 1px solid #e2e2e2; }
 
 .task-group {
