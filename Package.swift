@@ -43,29 +43,29 @@ let package = Package(
     targets: [
         .target(
             name: "FioriSwiftUI",
-            dependencies: ["FioriSwiftUICore", "FioriIntegrationCards"]
+            dependencies: ["FioriSwiftUICore", "FioriIntegrationCards"],
+            path: "FioriSwiftUI/Sources"
         ),
         .target(
             name: "FioriIntegrationCards",
-            dependencies: ["AnyCodable", "ObservableArray", "FioriCharts", "Zip", "FioriThemeManager"]
+            dependencies: ["AnyCodable", "ObservableArray", "FioriCharts", "Zip", "FioriThemeManager"],
+            path: "FioriIntegrationCards/Sources"
         ),
         .target(
             name: "FioriCharts",
-            dependencies: ["FioriThemeManager"],
+            dependencies: ["FioriThemeManager"], path: "FioriCharts/Sources",
             exclude: ["TestCases/SF_EnergyBenchmarking.csv"]
         ),
         .target(
             name: "FioriSwiftUICore",
             dependencies: ["FioriThemeManager", "FioriCharts"],
+            path: "FioriSwiftUICore/Sources",
             resources: [.process("FioriSwiftUICore.strings")]
         ),
         .target(
             name: "FioriThemeManager",
-            dependencies: []
-        ),
-        .testTarget(
-            name: "FioriSwiftUITests",
-            dependencies: ["FioriSwiftUI"]
+            dependencies: [],
+            path: "FioriThemeManager/Sources"
         )
     ]
 )
