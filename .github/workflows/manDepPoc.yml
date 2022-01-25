@@ -2,7 +2,7 @@ name: Try me
 
 on:
   workflow_dispatch:
-# fixed!  
+# fixed!!  
 jobs:
   call-my-workflow:
     uses: MarcoEidinger/swift-package-dependencies-check/.github/workflows/reusableWorkflow.yml@v2
