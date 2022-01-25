@@ -15,8 +15,10 @@ jobs:
 #         echo "$needsUpdates"
 #         echo "::set-output name=needsUpdates::$needsUpdates"
     - run: |
-          brew install mint
-          mint run SwiftPackageIndex/ReleaseNotes@main --verbose .
+          git clone https://github.com/SwiftPackageIndex/ReleaseNotes.git
+          cd ReleaseNotes
+          make install
+          swift release-notes
     - name: Update
 #       if: steps.isUpdateNeeded.outputs.isUpdateNeeded == true
       run: |
