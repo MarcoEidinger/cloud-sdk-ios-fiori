@@ -34,3 +34,12 @@ jobs:
 #         delete-branch: true
 #         title: 'chore: update package dependencies'
 #         body: ''
+
+  repeat:
+      runs-on: macos-11
+      env:
+        DEVELOPER_DIR: /Applications/Xcode_13.2.1.app/Contents/Developer
+      steps:
+      - run: |
+          brew install mint
+          mint run MarcoEidinger/Repeat@main --count 5 HelloWorld
