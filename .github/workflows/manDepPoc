@@ -1,4 +1,4 @@
-name: Dependency Management
+name: Try me
 
 on:
   workflow_dispatch:
