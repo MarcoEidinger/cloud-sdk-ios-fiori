@@ -6,6 +6,8 @@ on:
 jobs:
   spm-dep-check:
     runs-on: macos-11
+    env:
+      DEVELOPER_DIR: /Applications/Applications/Xcode_13.2.1.app/Contents/Developer
     steps:
     - uses: actions/checkout@v2
 #     - name: Check if update is needed
