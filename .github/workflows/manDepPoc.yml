@@ -7,7 +7,7 @@ jobs:
   spm-dep-check:
     runs-on: macos-11
     env:
-      DEVELOPER_DIR: /Applications/Applications/Xcode_13.2.1.app/Contents/Developer
+      DEVELOPER_DIR: Applications/Xcode_13.2.1.app/Contents/Developer
     steps:
     - uses: actions/checkout@v2
 #     - name: Check if update is needed
@@ -20,7 +20,7 @@ jobs:
           git clone https://github.com/SwiftPackageIndex/ReleaseNotes.git
           cd ReleaseNotes
           make install
-          swift release-notes
+          swift release-notes ../
     - name: Update
 #       if: steps.isUpdateNeeded.outputs.isUpdateNeeded == true
       run: |
