@@ -1,0 +1,16 @@
+Updating https://github.com/maparoni/Zip.git
+Updated https://github.com/maparoni/Zip.git (0.13s)
+Updating https://github.com/sstadelman/observable-array.git
+Updating https://github.com/Flight-School/AnyCodable.git
+Updated https://github.com/Flight-School/AnyCodable.git (0.14s)
+Updated https://github.com/sstadelman/observable-array.git (0.14s)
+Computing version for https://github.com/sstadelman/observable-array.git
+Computed https://github.com/sstadelman/observable-array.git at 1.2.0 (0.18s)
+Computing version for https://github.com/Flight-School/AnyCodable.git
+Computed https://github.com/Flight-School/AnyCodable.git at 0.6.2 (0.18s)
+
+1 dependency has changed:
+~ AnyCodable 0.6.1 -> AnyCodable 0.6.2
+
+Release notes URLs (updating from):
+https://github.com/Flight-School/AnyCodable/releases (0.6.1)
