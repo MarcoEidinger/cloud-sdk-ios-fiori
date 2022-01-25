@@ -72,4 +72,5 @@ jobs:
         id: spm-dep-check
         uses: MarcoEidinger/swift-package-dependencies-check@dev
       - name: Get the release notes
+        if: always()
         run: echo "Release Notes are ${{ steps.spm-dep-check.outputs.releaseNotes }}"
