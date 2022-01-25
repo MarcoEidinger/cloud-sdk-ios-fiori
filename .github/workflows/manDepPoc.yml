@@ -15,7 +15,7 @@ jobs:
       uses: actions/cache@v2
       with:
           path: ${{ github.workspace }}/mint
-          key: ${{ runner.os }}-mint-swiftreleasenotes
+          key: ${{ runner.os }}-mint-swiftreleasenotes1
           restore-keys: ${{ runner.os }}-mint-
     - name: Install package manager "Mint" to install and run Swift command line tool packages
       run: |
@@ -24,10 +24,10 @@ jobs:
       if: steps.mint-cache.outputs.cache-hit != 'true'
       run: mint install MarcoEidinger/ReleaseNotes@executableProduct
     - name: Run command line tool
-      run: mint run MarcoEidinger/ReleaseNotes@executableProduct .
+      run: mint run SwiftPackageIndex/ReleaseNotes@main .
 #     - run: |
 #         brew install mint
-#         mint install MarcoEidinger/ReleaseNotes@executableProduct
+#         mint install SwiftPackageIndex/ReleaseNotes@main
     - name: Check if update is needed
       id: isUpdateNeeded
       run: |
@@ -60,3 +60,14 @@ jobs:
       - run: |
           brew install mint
           mint run MarcoEidinger/Repeat@main --count 5 HelloWorld
+
+
+  linux:
+      runs-on: ubuntu-20.04
+      env:
+        DEVELOPER_DIR: /Applications/Xcode_13.2.1.app/Contents/Developer
+      steps:
+      - uses: actions/checkout@v2
+      - run: |
+          brew install mint
+          mint run SwiftPackageIndex/ReleaseNotes@main .
