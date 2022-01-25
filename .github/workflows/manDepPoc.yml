@@ -8,17 +8,17 @@ jobs:
     runs-on: macos-11
     steps:
     - uses: actions/checkout@v2
-    - name: Check if update is needed
-      id: isUpdateNeeded
-      run: |
-        needsUpdates=`swift package update --dry-run | grep -q "0 dependencies have changed.\|Everything is already up-to-date"`
-        echo "$needsUpdates"
-        echo "::set-output name=needsUpdates::$needsUpdates"
+#     - name: Check if update is needed
+#       id: isUpdateNeeded
+#       run: |
+#         needsUpdates=`swift package update --dry-run | grep -q "0 dependencies have changed.\|Everything is already up-to-date"`
+#         echo "$needsUpdates"
+#         echo "::set-output name=needsUpdates::$needsUpdates"
     - run: |
           brew install mint
           mint run SwiftPackageIndex/ReleaseNotes@main --verbose .
     - name: Update
-      if: steps.isUpdateNeeded.outputs.isUpdateNeeded == true
+#       if: steps.isUpdateNeeded.outputs.isUpdateNeeded == true
       run: |
         swift package update
 #     - name: Create Pull Request
