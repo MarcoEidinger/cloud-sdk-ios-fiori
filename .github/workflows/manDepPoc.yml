@@ -17,8 +17,8 @@ jobs:
       id: isUpdateNeeded
       run: |
         result=`swift package update --dry-run`
+        echo "$result"
         needsUpdates=`swift package update --dry-run | grep -q "0 dependencies have changed.\|Everything is already up-to-date"`
-        needsUpdates=
         echo "$needsUpdates"
         echo "::set-output name=needsUpdates::$needsUpdates"
     - name: Update
