@@ -68,6 +68,4 @@ jobs:
         DEVELOPER_DIR: /Applications/Xcode_13.2.1.app/Contents/Developer
       steps:
       - uses: actions/checkout@v2
-      - run: |
-          brew install mint
-          mint run SwiftPackageIndex/ReleaseNotes@main .
+      - uses: MarcoEidinger/swift-package-dependencies-check@dev
