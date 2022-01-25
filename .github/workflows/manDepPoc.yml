@@ -10,9 +10,24 @@ jobs:
       DEVELOPER_DIR: /Applications/Xcode_13.2.1.app/Contents/Developer
     steps:
     - uses: actions/checkout@v2
-    - run: |
-        brew install mint
-        mint install MarcoEidinger/ReleaseNotes@executableProduct
+    - name: Cache/Restore Mint packages
+      id: mint-cache
+      uses: actions/cache@v2
+      with:
+          path: ${{ github.workspace }}/mint
+          key: ${{ runner.os }}-mint-swiftreleasenotes
+          restore-keys: ${{ runner.os }}-mint-
+    - name: Install package manager "Mint" to install and run Swift command line tool packages
+      run: |
+          brew upgrade mint || brew install mint || true
+    - name: Install command line tool (if not yet cached)
+      if: steps.mint-cache.outputs.cache-hit != 'true'
+      run: mint install MarcoEidinger/ReleaseNotes@executableProduct
+    - name: Run command line tool
+      run: mint run swift-release-notes .
+#     - run: |
+#         brew install mint
+#         mint install MarcoEidinger/ReleaseNotes@executableProduct
     - name: Check if update is needed
       id: isUpdateNeeded
       run: |
