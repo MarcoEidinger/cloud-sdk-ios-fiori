@@ -10,15 +10,17 @@ jobs:
       DEVELOPER_DIR: /Applications/Xcode_13.2.1.app/Contents/Developer
     steps:
     - uses: actions/checkout@v2
-#     - name: Check if update is needed
-#       id: isUpdateNeeded
-#       run: |
-#         needsUpdates=`swift package update --dry-run | grep -q "0 dependencies have changed.\|Everything is already up-to-date"`
-#         echo "$needsUpdates"
-#         echo "::set-output name=needsUpdates::$needsUpdates"
     - run: |
-          brew install mint
-          mint install MarcoEidinger/ReleaseNotes
+        brew install mint
+        mint install MarcoEidinger/ReleaseNotes@executableProduct
+    - name: Check if update is needed
+      id: isUpdateNeeded
+      run: |
+        result=`swift package update --dry-run`
+        needsUpdates=`swift package update --dry-run | grep -q "0 dependencies have changed.\|Everything is already up-to-date"`
+        needsUpdates=
+        echo "$needsUpdates"
+        echo "::set-output name=needsUpdates::$needsUpdates"
     - name: Update
 #       if: steps.isUpdateNeeded.outputs.isUpdateNeeded == true
       run: |
