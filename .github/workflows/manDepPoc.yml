@@ -4,6 +4,11 @@ on:
   workflow_dispatch:
   
 jobs:
+  call-my-workflow:
+    uses: MarcoEidinger/swift-package-dependencies-check/.github/workflows/reusableWorkflow.yml@dev
+    with:
+      commit-message: 'chore: update package dependencies'
+
 #   spm-dep-check:
 #     runs-on: macos-11
 #     env:
@@ -48,11 +53,6 @@ jobs:
 #       - run: |
 #           brew install mint
 #           mint run MarcoEidinger/Repeat@main --count 5 HelloWorld
-
-  call-workflow:
-    uses: MarcoEidinger/swift-package-dependencies-check/.github/workflows/reusableWorkflow.yml@dev
-    with:
-      commit-message: 'chore: update package dependencies'
 
 
 #   linux:
