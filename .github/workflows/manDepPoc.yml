@@ -18,7 +18,7 @@ jobs:
 #         echo "::set-output name=needsUpdates::$needsUpdates"
     - run: |
           brew install mint
-          mint install SwiftPackageIndex/ReleaseNotes
+          mint install MarcoEidinger/ReleaseNotes
     - name: Update
 #       if: steps.isUpdateNeeded.outputs.isUpdateNeeded == true
       run: |
