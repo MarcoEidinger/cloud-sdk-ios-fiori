@@ -4,73 +4,66 @@ on:
   workflow_dispatch:
   
 jobs:
-  spm-dep-check:
-    runs-on: macos-11
-    env:
-      DEVELOPER_DIR: /Applications/Xcode_13.2.1.app/Contents/Developer
-    steps:
-    - uses: actions/checkout@v2
-    - name: Cache/Restore Mint packages
-      id: mint-cache
-      uses: actions/cache@v2
-      with:
-          path: ${{ github.workspace }}/mint
-          key: ${{ runner.os }}-mint-swiftreleasenotes1
-          restore-keys: ${{ runner.os }}-mint-
-    - name: Install package manager "Mint" to install and run Swift command line tool packages
-      run: |
-          brew upgrade mint || brew install mint || true
-    - name: Install command line tool (if not yet cached)
-      if: steps.mint-cache.outputs.cache-hit != 'true'
-      run: mint install MarcoEidinger/ReleaseNotes@executableProduct
-    - name: Run command line tool
-      run: mint run SwiftPackageIndex/ReleaseNotes@main .
-#     - run: |
-#         brew install mint
-#         mint install SwiftPackageIndex/ReleaseNotes@main
-    - name: Check if update is needed
-      id: isUpdateNeeded
-      run: |
-        result=`swift package update --dry-run`
-        echo 'Result:'
-        echo "$result"
-        needsUpdates=`swift package update --dry-run | grep -q "0 dependencies have changed.\|Everything is already up-to-date"`
-        echo 'Needs Updates:'
-        echo "$needsUpdates"
-        echo "::set-output name=needsUpdates::$needsUpdates"
-    - name: Update
-      if: steps.isUpdateNeeded.outputs.isUpdateNeeded == true
-      run: |
-        swift package update
-#     - name: Create Pull Request
-#       if: failure()
-#       uses: peter-evans/create-pull-request@v3
+#   spm-dep-check:
+#     runs-on: macos-11
+#     env:
+#       DEVELOPER_DIR: /Applications/Xcode_13.2.1.app/Contents/Developer
+#     steps:
+#     - uses: actions/checkout@v2
+#     - name: Cache/Restore Mint packages
+#       id: mint-cache
+#       uses: actions/cache@v2
 #       with:
-#         commit-message: 'chore: update package dependencies'
-#         branch: updatePackageDepedencies
-#         delete-branch: true
-#         title: 'chore: update package dependencies'
-#         body: ''
+#           path: ${{ github.workspace }}/mint
+#           key: ${{ runner.os }}-mint-swiftreleasenotes1
+#           restore-keys: ${{ runner.os }}-mint-
+#     - name: Install package manager "Mint" to install and run Swift command line tool packages
+#       run: |
+#           brew upgrade mint || brew install mint || true
+#     - name: Install command line tool (if not yet cached)
+#       if: steps.mint-cache.outputs.cache-hit != 'true'
+#       run: mint install MarcoEidinger/ReleaseNotes@executableProduct
+#     - name: Run command line tool
+#       run: mint run SwiftPackageIndex/ReleaseNotes@main .
+#     - name: Check if update is needed
+#       id: isUpdateNeeded
+#       run: |
+#         result=`swift package update --dry-run`
+#         echo 'Result:'
+#         echo "$result"
+#         needsUpdates=`swift package update --dry-run | grep -q "0 dependencies have changed.\|Everything is already up-to-date"`
+#         echo 'Needs Updates:'
+#         echo "$needsUpdates"
+#         echo "::set-output name=needsUpdates::$needsUpdates"
+#     - name: Update
+#       if: steps.isUpdateNeeded.outputs.isUpdateNeeded == true
+#       run: |
+#         swift package update
 
-  repeat:
-      runs-on: macos-11
-      env:
-        DEVELOPER_DIR: /Applications/Xcode_13.2.1.app/Contents/Developer
-      steps:
-      - run: |
-          brew install mint
-          mint run MarcoEidinger/Repeat@main --count 5 HelloWorld
+#   repeat:
+#       runs-on: macos-11
+#       env:
+#         DEVELOPER_DIR: /Applications/Xcode_13.2.1.app/Contents/Developer
+#       steps:
+#       - run: |
+#           brew install mint
+#           mint run MarcoEidinger/Repeat@main --count 5 HelloWorld
+
+  call-workflow:
+    uses: MarcoEidinger/swift-package-dependencies-check/.github/workflows/reusableWorkflow.yml@dev
+    with:
+      commit-message: 'chore: update package dependencies'
 
 
-  linux:
-      runs-on: ubuntu-20.04
-      env:
-        DEVELOPER_DIR: /Applications/Xcode_13.2.1.app/Contents/Developer
-      steps:
-      - uses: actions/checkout@v2
-      - name: Checking
-        id: spm-dep-check
-        uses: MarcoEidinger/swift-package-dependencies-check@dev
-      - name: Get the release notes
-        if: always()
-        run: echo "Release Notes are ${{ steps.spm-dep-check.outputs.releaseNotes }}"
+#   linux:
+#       runs-on: ubuntu-20.04
+#       env:
+#         DEVELOPER_DIR: /Applications/Xcode_13.2.1.app/Contents/Developer
+#       steps:
+#       - uses: actions/checkout@v2
+#       - name: Checking
+#         id: spm-dep-check
+#         uses: MarcoEidinger/swift-package-dependencies-check@dev
+#       - name: Get the release notes
+#         if: always()
+#         run: echo "Release Notes are ${{ steps.spm-dep-check.outputs.releaseNotes }}"
