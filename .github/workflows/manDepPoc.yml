@@ -24,7 +24,7 @@ jobs:
       if: steps.mint-cache.outputs.cache-hit != 'true'
       run: mint install MarcoEidinger/ReleaseNotes@executableProduct
     - name: Run command line tool
-      run: mint run swift-release-notes .
+      run: mint run MarcoEidinger/ReleaseNotes@executableProduct .
 #     - run: |
 #         brew install mint
 #         mint install MarcoEidinger/ReleaseNotes@executableProduct
