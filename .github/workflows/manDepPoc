@@ -1,0 +1,23 @@
+name: Dependency Management
+
+on:
+  workflow_dispatch:
+  
+jobs:
+  spm-dep-check:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Check Swift package dependencies
+      uses: MarcoEidinger/swift-package-dependencies-check@dev
+      with:
+        isMutating: true
+    - name: Create Pull Request
+      if: failure()
+      uses: peter-evans/create-pull-request@v3
+      with:
+        commit-message: 'chore: update package dependencies'
+        branch: updatePackageDepedencies
+        delete-branch: true
+        title: 'chore: update package dependencies'
+        body: ''
