@@ -5,7 +5,7 @@ on:
 # fixed!!  
 jobs:
   call-my-workflow:
-    uses: MarcoEidinger/swift-package-dependencies-check/.github/workflows/reusableWorkflow.yml@main
+    uses: MarcoEidinger/swift-package-dependencies-check/.github/workflows/reusableWorkflow.yml@2.1.3
     with:
       commit-message: 'chore: update package dependencies'
 
