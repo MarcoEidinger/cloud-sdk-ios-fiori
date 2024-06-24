@@ -28,7 +28,22 @@ let package = Package(
             name: "FioriThemeManager",
             type: .dynamic,
             targets: ["FioriThemeManager"]
-        )
+        ),
+        .library(
+            name: "FioriSwiftUICore-Static",
+            type: .static,
+            targets: ["FioriSwiftUICore"]
+        ),
+        .library(
+            name: "FioriCharts-Static",
+            type: .static,
+            targets: ["FioriCharts"]
+        ),
+        .library(
+            name: "FioriThemeManager-static",
+            type: .static,
+            targets: ["FioriThemeManager"]
+        )        
     ],
     targets: [
         .target(
