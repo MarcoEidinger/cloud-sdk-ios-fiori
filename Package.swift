@@ -15,6 +15,11 @@ let package = Package(
             targets: ["FioriSwiftUI"]
         ),
         .library(
+            name: "FioriSwiftUI-Static",
+            type: .static,
+            targets: ["FioriSwiftUI"]
+        ),
+        .library(
             name: "FioriSwiftUICore",
             type: .dynamic,
             targets: ["FioriSwiftUICore"]
